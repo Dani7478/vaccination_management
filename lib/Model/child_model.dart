@@ -1,4 +1,5 @@
 class Child {
+  String id;
   String childName;
   String parentName;
   DateTime dateOfBirth;
@@ -6,6 +7,7 @@ class Child {
   String hospitalname;
 
   Child({
+    required this.id,
     required this.childName,
     required this.parentName,
     required this.dateOfBirth,

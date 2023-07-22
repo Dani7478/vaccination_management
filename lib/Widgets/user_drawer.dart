@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccination_mangement/Controllers/controllers.dart';
+import 'package:vaccination_mangement/View/Home/profile_view.dart';
 import '../Constant/colors.dart';
 import 'package:vaccination_mangement/storage.dart';
 
@@ -148,6 +149,38 @@ Widget userDrawer(context) {
                 ),
               ),
             ),
+
+            InkWell(
+              onTap: () {
+                controller.updateDisplay(currentView: 'add appointment');
+                Navigator.pop(context);
+              },
+              child: Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                height: 60,
+                color: creamColor,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit_calendar_sharp,
+                      color: primaryColor,
+                      size: 30,
+                    ),
+                    SizedBox(
+                      width: 25,
+                    ),
+                    Text(
+                      'Add Appointment',
+                      style: GoogleFonts.lato(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
             SizedBox(
               height: 20,
             ),
@@ -238,10 +271,10 @@ Widget userDrawer(context) {
                 ),
               ),
             ),
+
             InkWell(
-              onTap: () {
-                controller.updateDisplay(currentView: 'update childs');
-                Navigator.pop(context);
+              onTap: (){
+                Get.to(MyProfilePage());
               },
               child: Container(
                 margin: EdgeInsets.all(5),
@@ -251,15 +284,12 @@ Widget userDrawer(context) {
                 child: Row(
                   children: [
                     Icon(
-                      Icons.more_sharp,
+                      Icons.logout,
                       color: primaryColor,
                       size: 30,
                     ),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    Text(
-                      'Update Child Data',
+                    SizedBox(width: 25,),
+                    Text('Profile',
                       style: GoogleFonts.lato(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

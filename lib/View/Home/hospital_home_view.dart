@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccination_mangement/Controllers/Home/hospital_controller.dart';
 import 'package:vaccination_mangement/Model/appointment_model.dart';
-import 'package:vaccination_mangement/Model/user_model.dart';
 import 'package:vaccination_mangement/Widgets/appointment_card.dart';
 import 'package:vaccination_mangement/Widgets/hospital_drawer.dart';
-import '../../Controllers/Home/user_controller.dart';
-import '../../Widgets/admin_drawer.dart';
-import '../../Widgets/child_card.dart';
-import '../../Widgets/user_drawer.dart';
 import '../../Widgets/widgets.dart';
 import '../../Constant/constants.dart';
 
@@ -90,19 +84,71 @@ class ViewAppointments extends StatelessWidget {
         child: GetBuilder<HospitalController>(
           init: HospitalController(),
           builder: (con) {
-            return ListView.builder(
-                itemCount: con.allHospitalAppointmentsList.length,
-                itemBuilder: (context, index) {
-                  ChildAppointment appoint= con.allHospitalAppointmentsList[index];
-                  return AppointmentCard(
-                    childName: appoint.childName!,
-                    date:'${appoint.bookDate?.day}:${appoint.bookDate?.month}:${appoint.bookDate?.year}',
-                    hospitalName: appoint.hospitalName!,
-                    status: appoint.status!,
-                    view: 'hospital',
-                    parentId: appoint.parentId!,
-                  );
-                });
+            return Column(
+              children: [
+                Expanded(
+                  flex: 15,
+                    child: Row(
+                      children: [
+                        Expanded(
+
+                            child: GetBuilder<HospitalController>(builder: (con) {
+                              return Container(
+                                padding: EdgeInsets.all(10),
+                                margin: EdgeInsets.symmetric(vertical: 5),
+                                color: primaryColor,
+                                child: InkWell(
+                                  onTap: () async {
+                                    final DateTime? picked = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2100),
+                                    );
+                                    if (picked != null ) {
+                                      con.updateDateOfBirth(newDate: picked);
+                                      con.searchAppointment();
+                                    }
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    decoration: BoxDecoration(color: Colors.white60),
+                                    child: Center(
+                                        child: Text(
+                                          con.searchDate == null
+                                              ? 'Search Date'
+                                              : '${con.searchDate?.day} : ${con.searchDate?.month} : ${con.searchDate?.year}',
+                                          style: GoogleFonts.lato(
+                                              fontSize: 18, fontWeight: FontWeight.w400),
+                                        )),
+                                  ),
+                                ),
+                              );
+                            }),
+                        ),
+
+
+                      ],
+                    )
+                ),
+                Expanded(
+                  flex: 85,
+                    child: ListView.builder(
+                        itemCount: con.allHospitalAppointmentsList.length,
+                        itemBuilder: (context, index) {
+                          ChildAppointment appoint= con.allHospitalAppointmentsList[index];
+                          return AppointmentCard(
+                            childName: appoint.childName!,
+                            date:appoint.appointmentDate!.toString(),
+                            hospitalName: appoint.hospitalName!,
+                            status: appoint.status!,
+                            view: 'hospital',
+                            parentId: appoint.parentId!,
+                          );
+                        })),
+              ],
+            );
           },
         ));
   }

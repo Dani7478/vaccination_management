@@ -31,7 +31,7 @@ Widget adminDrawer(context){
                     foregroundColor: primaryColor,
                   ),
                   SizedBox(width: 25,),
-                  Text('Mr.Irfan (Admin)',
+                  Text('Mr.Sikandar (Admin)',
                     style: GoogleFonts.lato(
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
@@ -247,34 +247,34 @@ Widget adminDrawer(context){
                 ),
               ),
             ),
-            InkWell(
-              onTap: (){
-               controller.updateDisplay(currentDisplay: 'more');
-                Navigator.pop(context);
-              },
-              child: Container(
-                margin: EdgeInsets.all(5),
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                height: 60,
-                color: creamColor,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.more_sharp,
-                      color: primaryColor,
-                      size: 30,
-                    ),
-                    SizedBox(width: 25,),
-                    Text('More',
-                      style: GoogleFonts.lato(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: (){
+            //    controller.updateDisplay(currentDisplay: 'more');
+            //     Navigator.pop(context);
+            //   },
+            //   child: Container(
+            //     margin: EdgeInsets.all(5),
+            //     padding: EdgeInsets.symmetric(horizontal: 10),
+            //     height: 60,
+            //     color: creamColor,
+            //     child: Row(
+            //       children: [
+            //         Icon(
+            //           Icons.more_sharp,
+            //           color: primaryColor,
+            //           size: 30,
+            //         ),
+            //         SizedBox(width: 25,),
+            //         Text('More',
+            //           style: GoogleFonts.lato(
+            //             fontSize: 16,
+            //             fontWeight: FontWeight.w500,
+            //           ),
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
             InkWell(
               onTap: (){
                 Storage().logout();

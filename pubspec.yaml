@@ -44,6 +44,11 @@ dependencies:
   firebase_core: ^2.7.1
   cloud_firestore: ^4.4.4
   shared_preferences: ^2.0.18
+  intl: ^0.18.1
+  pdf: ^3.10.4
+  path_provider: ^2.0.15
+  image: ^4.0.17
+  share_plus: ^7.0.2
 
 dev_dependencies:
   flutter_test:

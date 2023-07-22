@@ -1,7 +1,6 @@
 
 
  import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
 Widget bgImage( {child, context}){
   Size size=MediaQuery.of(context).size;

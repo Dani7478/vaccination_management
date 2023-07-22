@@ -1,5 +1,4 @@
 
-import 'package:flutter/material.dart';
 import 'package:vaccination_mangement/View/screens.dart';
 
 Widget customTextField({hintText, editingCtrl, obscur}) {

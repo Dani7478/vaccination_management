@@ -3,6 +3,7 @@ class ChildAppointment {
   String? parentName;
   String? parentId;
   DateTime? bookDate;
+  DateTime? appointmentDate;
   String? hospitalName;
   String? hospitalId;
   String? status;
@@ -12,8 +13,10 @@ class ChildAppointment {
     this.parentName,
     this.parentId,
     this.bookDate,
+    this.appointmentDate,
     this.hospitalName,
     this.hospitalId,
     this.status,
+
   });
 }
