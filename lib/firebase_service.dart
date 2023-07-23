@@ -74,6 +74,22 @@ class FirebaseService {
   }
 
 
+  Future<bool> isAppointmentAdded(String parentId, String childName) async {
+    try {
+      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('appointment') // Replace with your collection name
+          .where('parentId', isEqualTo: parentId)
+          .where('childName', isEqualTo: childName)
+          .get();
+
+      return querySnapshot.docs.isNotEmpty;
+    } catch (e) {
+      print('Error checking child existence: $e');
+      return false; // Return false in case of any error or if the child doesn't exist
+    }
+  }
+
+
 
   //get name..........................
   getName() async {
@@ -145,7 +161,7 @@ class FirebaseService {
           parentName: document['parentName'],
           parentId: document['parentId'],
           bookDate: document['bookDate'].toDate(),
-          appointmentDate: document['bookDate'].toDate(),
+          appointmentDate: document['appointment_date'].toDate(),
           hospitalName: document['hospitalName'],
           status: document['status'],
           hospitalId: document['hospitalId'],

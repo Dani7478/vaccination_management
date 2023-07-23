@@ -138,6 +138,11 @@ class UserController extends GetxController {
   bookAppointmrnt(ChildAppointment newAppointment) async {
     final prefs = await SharedPreferences.getInstance();
     String? userid=await prefs.getString('userid');
+
+  var result=  await FirebaseService().isAppointmentAdded(userid!,newAppointment.childName!);
+  if(result==true) {
+    customToast(message: '${newAppointment.childName} Appointment is already Added');
+  }else {
     var data={
       'childName': newAppointment.childName,
       'parentName': username,
@@ -150,6 +155,8 @@ class UserController extends GetxController {
     };
     print(data);
     await FirebaseService().bookAppointment(data: data);
+  }
+
   }
 
   //______________________all appointment

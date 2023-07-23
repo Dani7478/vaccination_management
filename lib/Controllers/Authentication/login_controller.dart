@@ -10,6 +10,7 @@ class loginController extends GetxController { //getx state management
   TextEditingController emailCtrl=TextEditingController();
   TextEditingController passwordCtrl=TextEditingController();
   TextEditingController confirmPasswordCtrl=TextEditingController();
+  bool isLoading=false;
 
 
   changePassword(){
@@ -32,8 +33,17 @@ class loginController extends GetxController { //getx state management
       Get.to(AdminHomeView());
     }
     else {
-     await FirebaseService().loginUser(email: emailCtrl.text,password: passwordCtrl.text);
-      // customToast(message: 'Welcome in Vaccination Management');
+      isLoading=true;
+      update();
+      try{
+        await FirebaseService().loginUser(email: emailCtrl.text,password: passwordCtrl.text);
+        isLoading=false;
+        update();
+      }catch(error){
+        isLoading=false;
+        update();
+      }
+
     }
   }
 

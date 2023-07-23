@@ -23,13 +23,14 @@ class AppointmentCard extends StatefulWidget {
   _AppointmentCardState createState() => _AppointmentCardState();
 }
 
-String actualDateFormat = '';
+
 
 class _AppointmentCardState extends State<AppointmentCard> {
   String? menuSelection;
-
+  String actualDateFormat = '';
   @override
   void initState() {
+    convertToDesiredFormat(widget.date);
     super.initState();
     menuSelection = widget.status;
   }
@@ -79,7 +80,6 @@ class _AppointmentCardState extends State<AppointmentCard> {
 
   @override
   Widget build(BuildContext context) {
-    convertToDesiredFormat(widget.date);
     Color backgroundColor;
 
     if (widget.status == 'pending') {

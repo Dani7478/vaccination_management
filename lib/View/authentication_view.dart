@@ -1,5 +1,6 @@
 import 'package:vaccination_mangement/Constant/colors.dart';
 import '../Controllers/controllers.dart';
+import '../Widgets/custom_loading_button.dart';
 import '../Widgets/widgets.dart';
 import 'screens.dart';
 
@@ -171,7 +172,7 @@ class LoginPortion extends StatelessWidget {
                 editingCtrl: controller.passwordCtrl,
                 obscur: true),
 
-            Padding(
+         Padding(
               padding: const EdgeInsets.only(right: 20),
               child: Align(
                 alignment: Alignment.topRight,
@@ -192,6 +193,8 @@ class LoginPortion extends StatelessWidget {
                 ),
               ),
             ),
+
+
             SizedBox(
               height: 20,
             ),
@@ -208,11 +211,11 @@ class LoginPortion extends StatelessWidget {
                 Text('Remember the Password'),
               ],
             ),
-            customButton(
+           controller.isLoading==false? customButton(
                 btnText: 'Login',
                 perform: () {
                   controller.submitData();
-                })
+                }): customLoadingButton(),
           ],
         );
       },
@@ -375,17 +378,11 @@ class RegisterPortion extends StatelessWidget {
                       Text('I hereby Accept All Conditions'),
                     ],
                   ),
-                  con.acceptConditions == true
-                      ? customButton(
+                  con.isLoading==false ? customButton(
                           btnText: 'Register',
                           perform: () {
                             con.submitData();
-                          })
-                      : customButton(
-                          btnText: 'Register',
-                          perform: () {
-                            customToast(message: 'Please Accept Conditions');
-                          })
+                          }): customLoadingButton()
                 ],
               ),
             ),

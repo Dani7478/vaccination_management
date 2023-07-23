@@ -13,6 +13,7 @@ class RegistrationController extends GetxController {
   TextEditingController confirmPasswordCtrl = TextEditingController();
   String role = 'user';
   bool acceptConditions = false;
+  bool isLoading=false;
 
   updateRole(String role) {
     this.role = role;
@@ -35,7 +36,10 @@ class RegistrationController extends GetxController {
       customToast(message: 'Please Password');
     } else if (passwordCtrl.text != passwordCtrl.text) {
       customToast(message: 'Password And Confirm Password Should Same');
-    } else {
+    } else if (acceptConditions==false) {
+      customToast(message: 'Please Accept Term and Conditions');
+    }
+    else {
       if (passwordCtrl.text != confirmPasswordCtrl.text) {
         customToast(message: 'Password are not same');
       } else {
@@ -49,9 +53,18 @@ class RegistrationController extends GetxController {
           'status': 'pending',
           'allow': false
         };
-        await FirebaseService().registerUser(data: newUser);
-        Get.put(AuthenticationController());
-        Get.find<AuthenticationController>().updateAuth(whichAuth: 'login');
+       try{
+         isLoading=true;
+         update();
+         await FirebaseService().registerUser(data: newUser);
+         Get.put(AuthenticationController());
+         Get.find<AuthenticationController>().updateAuth(whichAuth: 'login');
+         isLoading=false;
+         update();
+       }catch(error){
+         isLoading=false;
+         update();
+       }
       }
     }
   }
